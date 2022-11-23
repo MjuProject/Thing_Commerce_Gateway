@@ -1,0 +1,30 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: client-service
+          uri: lb://CLIENT-SERVICE
+          predicates:
+            - Path=/clients/**
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+jwt:
+  secret: testsecretkey541@qtgmdkgnrldfdfen
+  expiration: 3600000
