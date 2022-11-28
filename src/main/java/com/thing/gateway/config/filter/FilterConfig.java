@@ -21,6 +21,9 @@ public class FilterConfig {
                 .route("user-service", r -> r.path("/clients/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://CLIENT-SERVICE"))
+                .route("item-service", r -> r.path("/items/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://ITEM-SERVICE"))
                 .build();
     }
 

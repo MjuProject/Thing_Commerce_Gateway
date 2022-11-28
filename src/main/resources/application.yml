@@ -15,6 +15,10 @@ spring:
           uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**
+        - id: item-service
+          uri: lb://ITEM-SERVICE
+          predicates:
+            - Path=/items/**
 
 eureka:
   instance:
