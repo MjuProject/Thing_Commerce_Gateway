@@ -9,12 +9,10 @@ public class JwtConfig {
 
     @Value("${jwt.secret}")
     private String secretKey;
-    @Value("${jwt.expiration}")
-    private long tokenValidMillisecond;
 
     @Bean
     public JwtTokenUtils jwtTokenUtils(){
-        return new JwtTokenUtils(secretKey, tokenValidMillisecond);
+        return new JwtTokenUtils(secretKey);
     }
 
 }

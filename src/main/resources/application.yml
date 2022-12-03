@@ -6,6 +6,8 @@ spring:
     name: gateway-service
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
       routes:
         - id: client-service
           uri: lb://CLIENT-SERVICE
@@ -19,6 +21,26 @@ spring:
           uri: lb://ITEM-SERVICE
           predicates:
             - Path=/items/**
+        - id: openapi
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - http://localhost:3000
+              - http://127.0.0.1:5501
+            allow-credentials: true
+            allowedHeaders: '*'
+            allowedMethods:
+              - PUT
+              - GET
+              - POST
+              - DELETE
+              - OPTIONS
 
 eureka:
   instance:
@@ -31,4 +53,3 @@ eureka:
 
 jwt:
   secret: testsecretkey541@qtgmdkgnrldfdfen
-  expiration: 3600000

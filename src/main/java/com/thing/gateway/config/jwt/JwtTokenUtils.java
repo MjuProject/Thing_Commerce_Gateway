@@ -14,11 +14,9 @@ import java.util.Map;
 @NoArgsConstructor
 public class JwtTokenUtils {
 
-    private long tokenValidMillisecond;
     private Key key;
 
-    public JwtTokenUtils(String secretKey, long tokenValidMillisecond){
-        this.tokenValidMillisecond = tokenValidMillisecond;
+    public JwtTokenUtils(String secretKey){
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
