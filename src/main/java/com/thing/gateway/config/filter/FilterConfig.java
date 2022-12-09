@@ -24,6 +24,9 @@ public class FilterConfig {
                 .route("item-service", r -> r.path("/items/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://ITEM-SERVICE"))
+                .route("contract-service", r -> r.path("/contracts/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://CONTRACT-SERVICE"))
                 .build();
     }
 
