@@ -25,6 +25,10 @@ spring:
           uri: lb://CONTRACT-SERVICE
           predicates:
             - Path=/contracts/**
+        - id: basket-service
+            uri: lb://BASKET-SERVICE
+            predicates:
+              - Path=/baskets/**
 #        - id: openapi
 #          uri: http://localhost:${server.port}
 #          predicates:
